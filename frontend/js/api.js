@@ -1,5 +1,5 @@
 /**
- * API communication layer for Shogi Bot AI
+ * API communication layer for mike
  */
 
 class ShogiAPI {

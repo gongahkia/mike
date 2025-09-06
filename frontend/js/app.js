@@ -9,7 +9,7 @@ class ShogiApp {
     }
 
     async init() {
-        console.log('Initializing Shogi Bot AI...');
+        console.log('Initializing mike...');
         
         // Check if backend is available
         try {
@@ -27,7 +27,7 @@ class ShogiApp {
         // Start a new game automatically
         await this.game.startNewGame();
         
-        console.log('Shogi Bot AI initialized successfully');
+        console.log('mike initialized successfully');
     }
 
     showConnectionError() {

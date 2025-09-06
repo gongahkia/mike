@@ -1,5 +1,5 @@
 /**
- * Game logic and state management for Shogi Bot AI
+ * Game logic and state management for mike
  */
 
 class ShogiGame {
