@@ -3,8 +3,8 @@ Opening book for Shogi AI to improve early game play.
 """
 
 from typing import Dict, List, Optional, Tuple
-from backend.game.board import ShogiBoard
-from backend.game.pieces import Player
+from game.board import ShogiBoard
+from game.pieces import Player
 
 
 class OpeningBook:

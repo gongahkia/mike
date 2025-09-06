@@ -3,8 +3,8 @@ Position evaluation functions for Shogi AI.
 """
 
 from typing import Dict
-from backend.game.pieces import Piece, PieceType, Player
-from backend.game.board import ShogiBoard
+from game.pieces import Piece, PieceType, Player
+from game.board import ShogiBoard
 
 
 class PositionEvaluator:

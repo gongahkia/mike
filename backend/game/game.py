@@ -3,8 +3,8 @@ Main game controller for Shogi game management.
 """
 
 from typing import Dict, List, Optional, Tuple
-from backend.game.board import ShogiBoard
-from backend.game.pieces import Player, PieceType
+from board import ShogiBoard
+from pieces import Player, PieceType
 
 
 class ShogiGame:

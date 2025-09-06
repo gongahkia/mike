@@ -3,10 +3,10 @@ Main AI engine that combines all AI components.
 """
 
 from typing import Dict, Optional
-from backend.game.board import ShogiBoard
-from backend.game.pieces import Player
-from backend.ai.minimax import DifficultyAI
-from backend.ai.opening_book import OpeningBook
+from game.board import ShogiBoard
+from game.pieces import Player
+from minimax import DifficultyAI
+from opening_book import OpeningBook
 
 
 class ShogiAI:
@@ -52,7 +52,7 @@ class ShogiAI:
     
     def get_analysis(self, board: ShogiBoard, player: Player) -> Dict:
         """Get analysis of the current position."""
-        from backend.ai.evaluation import PositionEvaluator
+        from evaluation import PositionEvaluator
         
         evaluator = PositionEvaluator()
         

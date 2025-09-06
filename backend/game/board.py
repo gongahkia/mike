@@ -3,7 +3,7 @@ Shogi board representation and game state management.
 """
 
 from typing import List, Optional, Dict, Tuple
-from backend.game.pieces import Piece, PieceType, Player
+from pieces import Piece, PieceType, Player
 
 
 class ShogiBoard:
