@@ -1,0 +1,2 @@
+# Shogi game logic package
+

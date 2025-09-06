@@ -1,0 +1,2 @@
+# Shogi AI engine package
+
