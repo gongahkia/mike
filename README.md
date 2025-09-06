@@ -255,19 +255,19 @@ Mike adheres to Universal Shogi Interface standards for professional compatibili
 
 ### 5. Tactical Pattern Recognition
 
-**Pin Detection**: Comprehensive pin analysis across all piece types
-**Fork Recognition**: Multi-piece attack pattern identification  
-**Skewer Identification**: Linear attack sequence recognition
-**Sacrifice Evaluation**: Complex material exchange assessment
-**Mating Attack Recognition**: Forced mate sequence detection
+- **Pin Detection**: Comprehensive pin analysis across all piece types
+- **Fork Recognition**: Multi-piece attack pattern identification  
+- **Skewer Identification**: Linear attack sequence recognition
+- **Sacrifice Evaluation**: Complex material exchange assessment
+- **Mating Attack Recognition**: Forced mate sequence detection
 
 ### 6. Strategic Understanding
 
-**Piece Coordination**: Advanced piece harmony evaluation
-**Pawn Structure Analysis**: Complex pawn formation assessment
-**King Hunt Patterns**: Systematic king attack recognition
-**Endgame Tablebase**: Theoretical endgame position evaluation
-**Tempo Management**: Move timing and initiative control
+- **Piece Coordination**: Advanced piece harmony evaluation
+- **Pawn Structure Analysis**: Complex pawn formation assessment
+- **King Hunt Patterns**: Systematic king attack recognition
+- **Endgame Tablebase**: Theoretical endgame position evaluation
+- **Tempo Management**: Move timing and initiative control
 
 ### 7. Difficulty Scaling Intelligence
 
