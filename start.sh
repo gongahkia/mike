@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Shogi Bot AI - Simple Startup Script
+# mike - Simple Startup Script
 
-echo "🎌 Starting Shogi Bot AI..."
+echo "🎌 Starting mike..."
 
 # Check if we're in the right directory
 if [ ! -d "backend" ] || [ ! -d "frontend" ]; then
@@ -34,7 +34,7 @@ cd ..
 sleep 2
 
 echo ""
-echo "✅ Shogi Bot AI is now running!"
+echo "✅ mike is now running!"
 echo "🔗 Backend: http://localhost:5000"
 echo "🔗 Frontend: http://localhost:8080"
 echo "🌐 Open http://localhost:8080 in your browser to play!"

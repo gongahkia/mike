@@ -1,5 +1,5 @@
 """
-Flask API server for Shogi Bot AI.
+Flask API server for mike.
 """
 
 import sys
@@ -25,7 +25,7 @@ ai_engines = {}
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint."""
-    return jsonify({'status': 'healthy', 'message': 'Shogi Bot AI is running'})
+    return jsonify({'status': 'healthy', 'message': 'mike is running'})
 
 @app.route('/api/game/new', methods=['POST'])
 def new_game():
@@ -338,7 +338,7 @@ def internal_error(error):
     return jsonify({'error': 'Internal server error'}), 500
 
 if __name__ == '__main__':
-    print("🚀 Starting Shogi Bot AI Backend Server...")
+    print("🚀 Starting mike Backend Server...")
     print("🔗 Server will be available at: http://localhost:5000")
     print("🔗 Health check: http://localhost:5000/api/health")
     app.run(host='0.0.0.0', port=5000, debug=False)
