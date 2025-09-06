@@ -4,9 +4,9 @@ Minimax algorithm with alpha-beta pruning for Shogi AI.
 
 import time
 from typing import Dict, List, Optional, Tuple, Any
-from backend.game.board import ShogiBoard
-from backend.game.pieces import Player, PieceType
-from backend.ai.evaluation import PositionEvaluator
+from game.board import ShogiBoard
+from game.pieces import Player, PieceType
+from evaluation import PositionEvaluator
 
 
 class MinimaxAI:
@@ -131,7 +131,7 @@ class MinimaxAI:
             for col in range(9):
                 piece = board.get_piece(row, col)
                 if piece:
-                    from backend.game.pieces import Piece
+                    from game.pieces import Piece
                     new_piece = Piece(piece.piece_type, piece.player, piece.promoted)
                     new_board.set_piece(row, col, new_piece)
                 else:
@@ -141,7 +141,7 @@ class MinimaxAI:
         for player in [Player.SENTE, Player.GOTE]:
             new_board.captured_pieces[player] = []
             for piece in board.captured_pieces[player]:
-                from backend.game.pieces import Piece
+                from game.pieces import Piece
                 new_piece = Piece(piece.piece_type, piece.player, piece.promoted)
                 new_board.captured_pieces[player].append(new_piece)
         

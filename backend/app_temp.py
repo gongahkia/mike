@@ -2,6 +2,10 @@
 Flask API server for Shogi Bot AI.
 """
 
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 import uuid
 from flask import Flask, request, jsonify
 from flask_cors import CORS
