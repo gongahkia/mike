@@ -1,3 +1,5 @@
+[![](https://img.shields.io/badge/mike_1.0.0-passing-green)](https://github.com/gongahkia/mike/releases/tag/1.0.0) 
+
 # `Mike`
 
 ## Rationale
