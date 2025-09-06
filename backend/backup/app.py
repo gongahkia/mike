@@ -1,39 +1,6 @@
-#!/bin/bash
-
-# Shogi Bot AI Startup Script - Ultimate Working Version
-
-echo "🎌 Starting Shogi Bot AI..."
-
-# Check if we're in the right directory
-if [ ! -d "backend" ] || [ ! -d "frontend" ]; then
-    echo "❌ Error: Please run this script from the project root directory"
-    exit 1
-fi
-
-# Install dependencies
-echo "📦 Installing dependencies..."
-pip3 install -r backend/requirements.txt >/dev/null 2>&1
-
-# Create backup directory
-mkdir -p backend/backup 2>/dev/null
-
-# Backup all files
-echo "💾 Creating backups..."
-cp backend/app.py backend/backup/ 2>/dev/null || true
-cp backend/game/*.py backend/backup/ 2>/dev/null || true
-cp backend/ai/*.py backend/backup/ 2>/dev/null || true
-
-echo "🔧 Fixing ALL import statements precisely..."
-
-# Fix app.py - the main entry point
-cat > backend/app.py << 'EOF'
 """
 Flask API server for Shogi Bot AI.
 """
-
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import uuid
 from flask import Flask, request, jsonify
@@ -247,6 +214,105 @@ def get_ai_move(game_id):
     
     return jsonify(response)
 
+@app.route('/api/game/<game_id>/analysis', methods=['GET'])
+def get_position_analysis(game_id):
+    """Get AI analysis of the current position."""
+    if game_id not in games or game_id not in ai_engines:
+        return jsonify({'error': 'Game not found'}), 404
+    
+    game = games[game_id]
+    ai_engine = ai_engines[game_id]
+    
+    current_player = game.board.current_player
+    analysis = ai_engine.get_analysis(game.board, current_player)
+    
+    return jsonify(analysis)
+
+@app.route('/api/game/<game_id>/suggest', methods=['GET'])
+def suggest_move(game_id):
+    """Get move suggestion from AI."""
+    if game_id not in games or game_id not in ai_engines:
+        return jsonify({'error': 'Game not found'}), 404
+    
+    game = games[game_id]
+    ai_engine = ai_engines[game_id]
+    
+    if game.game_over:
+        return jsonify({'error': 'Game is already over'}), 400
+    
+    current_player = game.board.current_player
+    suggestion = ai_engine.suggest_move(game.board, current_player)
+    
+    return jsonify(suggestion)
+
+@app.route('/api/game/<game_id>/difficulty', methods=['POST'])
+def set_difficulty(game_id):
+    """Change AI difficulty for a game."""
+    if game_id not in games or game_id not in ai_engines:
+        return jsonify({'error': 'Game not found'}), 404
+    
+    data = request.get_json()
+    if not data or 'difficulty' not in data:
+        return jsonify({'error': 'Difficulty not provided'}), 400
+    
+    difficulty = data['difficulty']
+    if difficulty not in ['easy', 'medium', 'hard']:
+        return jsonify({'error': 'Invalid difficulty level'}), 400
+    
+    ai_engine = ai_engines[game_id]
+    ai_engine.set_difficulty(difficulty)
+    
+    return jsonify({
+        'success': True,
+        'difficulty': difficulty
+    })
+
+@app.route('/api/game/<game_id>/history', methods=['GET'])
+def get_move_history(game_id):
+    """Get move history for a game."""
+    if game_id not in games:
+        return jsonify({'error': 'Game not found'}), 404
+    
+    game = games[game_id]
+    history = game.get_move_history()
+    
+    return jsonify({
+        'move_history': history,
+        'move_count': len(history)
+    })
+
+@app.route('/api/games', methods=['GET'])
+def list_games():
+    """List all active games."""
+    game_list = []
+    for game_id, game in games.items():
+        ai_engine = ai_engines.get(game_id)
+        game_list.append({
+            'game_id': game_id,
+            'current_player': game.board.current_player.value,
+            'game_over': game.game_over,
+            'winner': game.winner.value if game.winner else None,
+            'difficulty': ai_engine.get_difficulty() if ai_engine else 'unknown',
+            'move_count': len(game.board.move_history)
+        })
+    
+    return jsonify({
+        'games': game_list,
+        'total_games': len(game_list)
+    })
+
+@app.route('/api/game/<game_id>', methods=['DELETE'])
+def delete_game(game_id):
+    """Delete a game."""
+    if game_id not in games:
+        return jsonify({'error': 'Game not found'}), 404
+    
+    del games[game_id]
+    if game_id in ai_engines:
+        del ai_engines[game_id]
+    
+    return jsonify({'success': True, 'message': 'Game deleted'})
+
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({'error': 'Endpoint not found'}), 404
@@ -256,121 +322,4 @@ def internal_error(error):
     return jsonify({'error': 'Internal server error'}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
-EOF
-
-# Fix game/board.py
-sed -i 's/from backend\.game\.pieces import/from game.pieces import/g' backend/game/board.py
-
-# Fix game/game.py
-sed -i 's/from backend\.game\.board import/from game.board import/g' backend/game/game.py
-sed -i 's/from backend\.game\.pieces import/from game.pieces import/g' backend/game/game.py
-
-# Fix ai/evaluation.py
-sed -i 's/from backend\.game\.pieces import/from game.pieces import/g' backend/ai/evaluation.py
-sed -i 's/from backend\.game\.board import/from game.board import/g' backend/ai/evaluation.py
-
-# Fix ai/minimax.py
-sed -i 's/from backend\.game\.board import/from game.board import/g' backend/ai/minimax.py
-sed -i 's/from backend\.game\.pieces import/from game.pieces import/g' backend/ai/minimax.py
-sed -i 's/from backend\.ai\.evaluation import/from ai.evaluation import/g' backend/ai/minimax.py
-
-# Fix ai/opening_book.py
-sed -i 's/from backend\.game\.board import/from game.board import/g' backend/ai/opening_book.py
-sed -i 's/from backend\.game\.pieces import/from game.pieces import/g' backend/ai/opening_book.py
-
-# Fix ai/engine.py
-sed -i 's/from backend\.game\.board import/from game.board import/g' backend/ai/engine.py
-sed -i 's/from backend\.game\.pieces import/from game.pieces import/g' backend/ai/engine.py
-sed -i 's/from backend\.ai\.minimax import/from ai.minimax import/g' backend/ai/engine.py
-sed -i 's/from backend\.ai\.opening_book import/from ai.opening_book import/g' backend/ai/engine.py
-sed -i 's/from backend\.ai\.evaluation import/from ai.evaluation import/g' backend/ai/engine.py
-
-echo "✅ All import statements fixed!"
-
-# Start backend
-echo "🚀 Starting backend server..."
-cd backend
-python3 app.py &
-BACKEND_PID=$!
-cd ..
-
-# Wait for backend to start
-echo "⏳ Waiting for backend to initialize..."
-sleep 5
-
-# Check if backend is running
-if ! kill -0 $BACKEND_PID 2>/dev/null; then
-    echo "❌ Backend failed to start. Check the error above."
-    exit 1
-fi
-
-# Test backend health
-echo "🔍 Testing backend connection..."
-for i in {1..10}; do
-    if curl -s http://localhost:5000/api/health >/dev/null 2>&1; then
-        echo "✅ Backend is healthy!"
-        break
-    fi
-    if [ $i -eq 10 ]; then
-        echo "❌ Backend not responding"
-        kill $BACKEND_PID 2>/dev/null || true
-        exit 1
-    fi
-    sleep 1
-done
-
-# Start frontend
-echo "🌐 Starting frontend server..."
-cd frontend
-python3 -m http.server 8080 >/dev/null 2>&1 &
-FRONTEND_PID=$!
-cd ..
-
-sleep 2
-
-echo ""
-echo "🎉 Shogi Bot AI is now running successfully!"
-echo "=================================="
-echo "🔗 Backend API: http://localhost:5000"
-echo "🔗 Frontend: http://localhost:8080"
-echo "🌐 Open http://localhost:8080 in your browser to play!"
-echo "=================================="
-echo ""
-echo "Press Ctrl+C to stop both servers"
-
-# Cleanup function
-cleanup() {
-    echo ""
-    echo "🛑 Stopping servers..."
-    kill $BACKEND_PID 2>/dev/null || true
-    kill $FRONTEND_PID 2>/dev/null || true
-    
-    # Restore original files
-    if [ -d "backend/backup" ]; then
-        echo "🔄 Restoring original files..."
-        cp backend/backup/* backend/ 2>/dev/null || true
-        cp backend/backup/*.py backend/game/ 2>/dev/null || true
-        cp backend/backup/*.py backend/ai/ 2>/dev/null || true
-    fi
-    
-    echo "👋 Goodbye!"
-    exit 0
-}
-
-# Set up signal handler
-trap cleanup SIGINT SIGTERM
-
-# Keep script running
-while true; do
-    # Check if processes are still running
-    if ! kill -0 $BACKEND_PID 2>/dev/null; then
-        echo "❌ Backend stopped unexpectedly"
-        cleanup
-    fi
-    if ! kill -0 $FRONTEND_PID 2>/dev/null; then
-        echo "❌ Frontend stopped unexpectedly"
-        cleanup
-    fi
-    sleep 5
-done
+    app.run(host='0.0.0.0', port=5000, debug=True)

@@ -2,6 +2,10 @@
 Flask API server for Shogi Bot AI.
 """
 
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 import uuid
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -214,105 +218,6 @@ def get_ai_move(game_id):
     
     return jsonify(response)
 
-@app.route('/api/game/<game_id>/analysis', methods=['GET'])
-def get_position_analysis(game_id):
-    """Get AI analysis of the current position."""
-    if game_id not in games or game_id not in ai_engines:
-        return jsonify({'error': 'Game not found'}), 404
-    
-    game = games[game_id]
-    ai_engine = ai_engines[game_id]
-    
-    current_player = game.board.current_player
-    analysis = ai_engine.get_analysis(game.board, current_player)
-    
-    return jsonify(analysis)
-
-@app.route('/api/game/<game_id>/suggest', methods=['GET'])
-def suggest_move(game_id):
-    """Get move suggestion from AI."""
-    if game_id not in games or game_id not in ai_engines:
-        return jsonify({'error': 'Game not found'}), 404
-    
-    game = games[game_id]
-    ai_engine = ai_engines[game_id]
-    
-    if game.game_over:
-        return jsonify({'error': 'Game is already over'}), 400
-    
-    current_player = game.board.current_player
-    suggestion = ai_engine.suggest_move(game.board, current_player)
-    
-    return jsonify(suggestion)
-
-@app.route('/api/game/<game_id>/difficulty', methods=['POST'])
-def set_difficulty(game_id):
-    """Change AI difficulty for a game."""
-    if game_id not in games or game_id not in ai_engines:
-        return jsonify({'error': 'Game not found'}), 404
-    
-    data = request.get_json()
-    if not data or 'difficulty' not in data:
-        return jsonify({'error': 'Difficulty not provided'}), 400
-    
-    difficulty = data['difficulty']
-    if difficulty not in ['easy', 'medium', 'hard']:
-        return jsonify({'error': 'Invalid difficulty level'}), 400
-    
-    ai_engine = ai_engines[game_id]
-    ai_engine.set_difficulty(difficulty)
-    
-    return jsonify({
-        'success': True,
-        'difficulty': difficulty
-    })
-
-@app.route('/api/game/<game_id>/history', methods=['GET'])
-def get_move_history(game_id):
-    """Get move history for a game."""
-    if game_id not in games:
-        return jsonify({'error': 'Game not found'}), 404
-    
-    game = games[game_id]
-    history = game.get_move_history()
-    
-    return jsonify({
-        'move_history': history,
-        'move_count': len(history)
-    })
-
-@app.route('/api/games', methods=['GET'])
-def list_games():
-    """List all active games."""
-    game_list = []
-    for game_id, game in games.items():
-        ai_engine = ai_engines.get(game_id)
-        game_list.append({
-            'game_id': game_id,
-            'current_player': game.board.current_player.value,
-            'game_over': game.game_over,
-            'winner': game.winner.value if game.winner else None,
-            'difficulty': ai_engine.get_difficulty() if ai_engine else 'unknown',
-            'move_count': len(game.board.move_history)
-        })
-    
-    return jsonify({
-        'games': game_list,
-        'total_games': len(game_list)
-    })
-
-@app.route('/api/game/<game_id>', methods=['DELETE'])
-def delete_game(game_id):
-    """Delete a game."""
-    if game_id not in games:
-        return jsonify({'error': 'Game not found'}), 404
-    
-    del games[game_id]
-    if game_id in ai_engines:
-        del ai_engines[game_id]
-    
-    return jsonify({'success': True, 'message': 'Game deleted'})
-
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({'error': 'Endpoint not found'}), 404
@@ -322,4 +227,4 @@ def internal_error(error):
     return jsonify({'error': 'Internal server error'}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
