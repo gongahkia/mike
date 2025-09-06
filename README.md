@@ -2,6 +2,8 @@
 
 # `Mike`
 
+Rudimentary [Shogi Engine](https://en.wikipedia.org/wiki/Computer_shogi) that adheres to [USI](http://hgm.nubati.net/usi.html) conventions.
+
 ## Stack
 
 * *Frontend*: [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
