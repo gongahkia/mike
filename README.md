@@ -32,125 +32,6 @@ Rudimentary, [USI](http://hgm.nubati.net/usi.html)-compliant [Shogi Engine](http
 
 ![](./asset/reference/analysis.png)
 
-## Logic
-
-### 1. Multi-Layer Position Evaluation System
-
-The engine employs a comprehensive evaluation framework that analyzes positions through multiple dimensions:
-
-- **Material Balance Analysis**: Dynamic piece valuation considering promoted states and positional context
-- **Positional Scoring**: Advanced square-control evaluation with emphasis on central dominance
-- **King Safety Assessment**: Multi-faceted king security analysis including escape squares and attack patterns
-- **Mobility Evaluation**: Piece activity measurement with tactical opportunity recognition
-- **Captured Piece Valuation**: Strategic assessment of pieces in hand with drop potential analysis
-
-### 2. Advanced Search Algorithm Implementation
-
-**Minimax with Alpha-Beta Pruning**: The core search engine utilizes sophisticated pruning techniques:
-- **Variable Depth Search**: Adaptive depth control (1-5 plies) based on difficulty settings
-- **Move Ordering Optimization**: Intelligent move prioritization for maximum pruning efficiency
-- **Transposition Handling**: Efficient position caching to avoid redundant calculations
-- **Time Management**: Dynamic time allocation with emergency time controls
-
-**Search Enhancements**:
-- **Iterative Deepening**: Progressive depth increase for optimal time utilization
-- **Quiescence Search**: Extended search in tactical positions to avoid horizon effects
-- **Null Move Pruning**: Advanced pruning technique for non-critical positions
-
-### 3. Opening Book Integration
-
-The engine incorporates professional-level opening theory:
-- **Joseki Database**: Comprehensive collection of standard opening sequences
-- **Fuseki Patterns**: Strategic opening frameworks (Static Rook, Ranging Rook, Central Rook)
-- **Transposition Recognition**: Intelligent handling of move order variations
-- **Book Learning**: Adaptive opening repertoire based on game outcomes
-
-### 4. USI Protocol Compliance
-
-Mike adheres to Universal Shogi Interface standards for professional compatibility:
-
-**Command Processing**:
-- `usi` - Engine identification and capability reporting
-- `isready` - Initialization confirmation with full system validation
-- `usinewgame` - Game state reset with memory cleanup
-- `position` - Board state parsing with move validation
-- `go` - Search initiation with time control management
-- `stop` - Immediate search termination with best move reporting
-
-**Advanced USI Features**:
-- **Time Control Management**: Precise byoyomi and sudden death handling
-- **Ponder Mode**: Background thinking during opponent's time
-- **Multi-PV Analysis**: Multiple principal variation reporting
-- **Hash Table Management**: Dynamic memory allocation and cleanup
-
-### 5. Tactical Pattern Recognition
-
-**Pin Detection**: Comprehensive pin analysis across all piece types
-**Fork Recognition**: Multi-piece attack pattern identification  
-**Skewer Identification**: Linear attack sequence recognition
-**Sacrifice Evaluation**: Complex material exchange assessment
-**Mating Attack Recognition**: Forced mate sequence detection
-
-### 6. Strategic Understanding
-
-**Piece Coordination**: Advanced piece harmony evaluation
-**Pawn Structure Analysis**: Complex pawn formation assessment
-**King Hunt Patterns**: Systematic king attack recognition
-**Endgame Tablebase**: Theoretical endgame position evaluation
-**Tempo Management**: Move timing and initiative control
-
-### 7. Difficulty Scaling Intelligence
-
-**Easy Mode (Depth 1)**:
-- Simplified evaluation with 30% random move injection
-- Basic tactical awareness with material focus
-- 1-second thinking time limit
-
-**Medium Mode (Depth 3)**:
-- Balanced strategic and tactical evaluation
-- 10% random move variation for human-like play
-- 3-second analysis window
-
-**Hard Mode (Depth 5)**:
-- Full-strength analysis with no randomization
-- Complete tactical and strategic evaluation
-- 8-second deep analysis capability
-
-### 8. Move Generation Complexity
-
-**Legal Move Validation**: Multi-stage move legality verification
-- **Basic Rule Compliance**: Fundamental Shogi movement rules
-- **Check Avoidance**: King safety preservation in all variations
-- **Promotion Logic**: Intelligent promotion decision making
-- **Drop Restrictions**: Complex piece drop rule enforcement
-
-**Special Move Handling**:
-- **Forced Promotion**: Automatic promotion in terminal squares
-- **Optional Promotion**: Strategic promotion evaluation
-- **Drop Validation**: Comprehensive drop legality checking
-- **Repetition Detection**: Draw by repetition recognition
-
-### 9. Memory Management & Optimization
-
-**Efficient Board Representation**: Optimized data structures for rapid position manipulation
-**Move History Tracking**: Complete game record with undo capability
-**Hash Table Optimization**: Dynamic memory allocation based on available resources
-**Garbage Collection**: Intelligent memory cleanup during long games
-
-### 10. Error Handling & Robustness
-
-**Input Validation**: Comprehensive move and position validation
-**State Recovery**: Automatic error recovery with position restoration
-**Timeout Management**: Graceful handling of time pressure situations
-**Resource Monitoring**: System resource usage optimization
-
-### Mike Performance Characteristics
-
-- **Nodes Per Second**: 50,000+ positions evaluated per second
-- **Memory Efficiency**: Optimized for systems with 512MB+ RAM
-- **Scalability**: Linear performance scaling with available CPU cores
-- **Reliability**: 99.9%+ uptime in tournament conditions
-
 ## Usage
 
 The below instructions are for locally hosting `Mike`.
@@ -320,3 +201,122 @@ The name `Mike` is in reference to [Mike-chan](https://march-comes-like-lion.fan
 <div align="center">
     <img src="./asset/logo/mike.webp" width="75%">
 </div>
+
+## Logic
+
+### 1. Multi-Layer Position Evaluation System
+
+The engine employs a comprehensive evaluation framework that analyzes positions through multiple dimensions:
+
+- **Material Balance Analysis**: Dynamic piece valuation considering promoted states and positional context
+- **Positional Scoring**: Advanced square-control evaluation with emphasis on central dominance
+- **King Safety Assessment**: Multi-faceted king security analysis including escape squares and attack patterns
+- **Mobility Evaluation**: Piece activity measurement with tactical opportunity recognition
+- **Captured Piece Valuation**: Strategic assessment of pieces in hand with drop potential analysis
+
+### 2. Advanced Search Algorithm Implementation
+
+**Minimax with Alpha-Beta Pruning**: The core search engine utilizes sophisticated pruning techniques:
+- **Variable Depth Search**: Adaptive depth control (1-5 plies) based on difficulty settings
+- **Move Ordering Optimization**: Intelligent move prioritization for maximum pruning efficiency
+- **Transposition Handling**: Efficient position caching to avoid redundant calculations
+- **Time Management**: Dynamic time allocation with emergency time controls
+
+**Search Enhancements**:
+- **Iterative Deepening**: Progressive depth increase for optimal time utilization
+- **Quiescence Search**: Extended search in tactical positions to avoid horizon effects
+- **Null Move Pruning**: Advanced pruning technique for non-critical positions
+
+### 3. Opening Book Integration
+
+The engine incorporates professional-level opening theory:
+- **Joseki Database**: Comprehensive collection of standard opening sequences
+- **Fuseki Patterns**: Strategic opening frameworks (Static Rook, Ranging Rook, Central Rook)
+- **Transposition Recognition**: Intelligent handling of move order variations
+- **Book Learning**: Adaptive opening repertoire based on game outcomes
+
+### 4. USI Protocol Compliance
+
+Mike adheres to Universal Shogi Interface standards for professional compatibility:
+
+**Command Processing**:
+- `usi` - Engine identification and capability reporting
+- `isready` - Initialization confirmation with full system validation
+- `usinewgame` - Game state reset with memory cleanup
+- `position` - Board state parsing with move validation
+- `go` - Search initiation with time control management
+- `stop` - Immediate search termination with best move reporting
+
+**Advanced USI Features**:
+- **Time Control Management**: Precise byoyomi and sudden death handling
+- **Ponder Mode**: Background thinking during opponent's time
+- **Multi-PV Analysis**: Multiple principal variation reporting
+- **Hash Table Management**: Dynamic memory allocation and cleanup
+
+### 5. Tactical Pattern Recognition
+
+**Pin Detection**: Comprehensive pin analysis across all piece types
+**Fork Recognition**: Multi-piece attack pattern identification  
+**Skewer Identification**: Linear attack sequence recognition
+**Sacrifice Evaluation**: Complex material exchange assessment
+**Mating Attack Recognition**: Forced mate sequence detection
+
+### 6. Strategic Understanding
+
+**Piece Coordination**: Advanced piece harmony evaluation
+**Pawn Structure Analysis**: Complex pawn formation assessment
+**King Hunt Patterns**: Systematic king attack recognition
+**Endgame Tablebase**: Theoretical endgame position evaluation
+**Tempo Management**: Move timing and initiative control
+
+### 7. Difficulty Scaling Intelligence
+
+**Easy Mode (Depth 1)**:
+- Simplified evaluation with 30% random move injection
+- Basic tactical awareness with material focus
+- 1-second thinking time limit
+
+**Medium Mode (Depth 3)**:
+- Balanced strategic and tactical evaluation
+- 10% random move variation for human-like play
+- 3-second analysis window
+
+**Hard Mode (Depth 5)**:
+- Full-strength analysis with no randomization
+- Complete tactical and strategic evaluation
+- 8-second deep analysis capability
+
+### 8. Move Generation Complexity
+
+**Legal Move Validation**: Multi-stage move legality verification
+- **Basic Rule Compliance**: Fundamental Shogi movement rules
+- **Check Avoidance**: King safety preservation in all variations
+- **Promotion Logic**: Intelligent promotion decision making
+- **Drop Restrictions**: Complex piece drop rule enforcement
+
+**Special Move Handling**:
+- **Forced Promotion**: Automatic promotion in terminal squares
+- **Optional Promotion**: Strategic promotion evaluation
+- **Drop Validation**: Comprehensive drop legality checking
+- **Repetition Detection**: Draw by repetition recognition
+
+### 9. Memory Management & Optimization
+
+**Efficient Board Representation**: Optimized data structures for rapid position manipulation
+**Move History Tracking**: Complete game record with undo capability
+**Hash Table Optimization**: Dynamic memory allocation based on available resources
+**Garbage Collection**: Intelligent memory cleanup during long games
+
+### 10. Error Handling & Robustness
+
+**Input Validation**: Comprehensive move and position validation
+**State Recovery**: Automatic error recovery with position restoration
+**Timeout Management**: Graceful handling of time pressure situations
+**Resource Monitoring**: System resource usage optimization
+
+### Mike Performance Characteristics
+
+- **Nodes Per Second**: 50,000+ positions evaluated per second
+- **Memory Efficiency**: Optimized for systems with 512MB+ RAM
+- **Scalability**: Linear performance scaling with available CPU cores
+- **Reliability**: 99.9%+ uptime in tournament conditions
