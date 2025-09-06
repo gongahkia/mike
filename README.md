@@ -302,17 +302,17 @@ Mike adheres to Universal Shogi Interface standards for professional compatibili
 
 ### 9. Memory Management & Optimization
 
-**Efficient Board Representation**: Optimized data structures for rapid position manipulation
-**Move History Tracking**: Complete game record with undo capability
-**Hash Table Optimization**: Dynamic memory allocation based on available resources
-**Garbage Collection**: Intelligent memory cleanup during long games
+- **Efficient Board Representation**: Optimized data structures for rapid position manipulation
+- **Move History Tracking**: Complete game record with undo capability
+- **Hash Table Optimization**: Dynamic memory allocation based on available resources
+- **Garbage Collection**: Intelligent memory cleanup during long games
 
 ### 10. Error Handling & Robustness
 
-**Input Validation**: Comprehensive move and position validation
-**State Recovery**: Automatic error recovery with position restoration
-**Timeout Management**: Graceful handling of time pressure situations
-**Resource Monitoring**: System resource usage optimization
+- **Input Validation**: Comprehensive move and position validation
+- **State Recovery**: Automatic error recovery with position restoration
+- **Timeout Management**: Graceful handling of time pressure situations
+- **Resource Monitoring**: System resource usage optimization
 
 ### Mike Performance Characteristics
 
