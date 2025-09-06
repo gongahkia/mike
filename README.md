@@ -18,9 +18,19 @@
 
 ## Usage
 
-...
+The below instructions are for locally hosting `Mike`.
+
+1. Execute the below.
 
 ```console
+$ git clone https://github.com/gongahkia/mike && cd mike
+$ chmod +x start.sh
+```
+
+2. Then run the below shell script to spin up both the Frontend and Backend.
+
+```console
+$ ./start.sh
 ```
 
 ## Architecture
