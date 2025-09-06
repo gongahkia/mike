@@ -2,15 +2,11 @@
 
 # `Mike`
 
-## Rationale
-
-...
-
 ## Stack
 
-* *Frontend*:
-* *Backend*:
-* *Cache*: 
+* *Frontend*: [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* *Backend*: [Python](https://www.python.org/), [Flask](https://flask.palletsprojects.com/en/stable/)
+* *Cache*: [Redis](https://redis.io/)
 
 ## Screenshots
 
