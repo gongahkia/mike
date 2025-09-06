@@ -34,7 +34,7 @@ Rudimentary, [USI](http://hgm.nubati.net/usi.html)-compliant [Shogi Engine](http
 
 ## Logic
 
-#### 1. **Multi-Layer Position Evaluation System**
+### 1. Multi-Layer Position Evaluation System
 
 The engine employs a comprehensive evaluation framework that analyzes positions through multiple dimensions:
 
@@ -44,7 +44,7 @@ The engine employs a comprehensive evaluation framework that analyzes positions 
 - **Mobility Evaluation**: Piece activity measurement with tactical opportunity recognition
 - **Captured Piece Valuation**: Strategic assessment of pieces in hand with drop potential analysis
 
-#### 2. **Advanced Search Algorithm Implementation**
+### 2. Advanced Search Algorithm Implementation
 
 **Minimax with Alpha-Beta Pruning**: The core search engine utilizes sophisticated pruning techniques:
 - **Variable Depth Search**: Adaptive depth control (1-5 plies) based on difficulty settings
@@ -57,7 +57,7 @@ The engine employs a comprehensive evaluation framework that analyzes positions 
 - **Quiescence Search**: Extended search in tactical positions to avoid horizon effects
 - **Null Move Pruning**: Advanced pruning technique for non-critical positions
 
-#### 3. **Opening Book Integration**
+### 3. Opening Book Integration
 
 The engine incorporates professional-level opening theory:
 - **Joseki Database**: Comprehensive collection of standard opening sequences
@@ -65,7 +65,7 @@ The engine incorporates professional-level opening theory:
 - **Transposition Recognition**: Intelligent handling of move order variations
 - **Book Learning**: Adaptive opening repertoire based on game outcomes
 
-#### 4. **USI Protocol Compliance**
+### 4. USI Protocol Compliance
 
 Mike adheres to Universal Shogi Interface standards for professional compatibility:
 
@@ -83,7 +83,7 @@ Mike adheres to Universal Shogi Interface standards for professional compatibili
 - **Multi-PV Analysis**: Multiple principal variation reporting
 - **Hash Table Management**: Dynamic memory allocation and cleanup
 
-#### 5. **Tactical Pattern Recognition**
+### 5. Tactical Pattern Recognition
 
 **Pin Detection**: Comprehensive pin analysis across all piece types
 **Fork Recognition**: Multi-piece attack pattern identification  
@@ -91,7 +91,7 @@ Mike adheres to Universal Shogi Interface standards for professional compatibili
 **Sacrifice Evaluation**: Complex material exchange assessment
 **Mating Attack Recognition**: Forced mate sequence detection
 
-#### 6. **Strategic Understanding**
+### 6. Strategic Understanding
 
 **Piece Coordination**: Advanced piece harmony evaluation
 **Pawn Structure Analysis**: Complex pawn formation assessment
@@ -99,7 +99,7 @@ Mike adheres to Universal Shogi Interface standards for professional compatibili
 **Endgame Tablebase**: Theoretical endgame position evaluation
 **Tempo Management**: Move timing and initiative control
 
-#### 7. **Difficulty Scaling Intelligence**
+### 7. Difficulty Scaling Intelligence
 
 **Easy Mode (Depth 1)**:
 - Simplified evaluation with 30% random move injection
@@ -116,7 +116,7 @@ Mike adheres to Universal Shogi Interface standards for professional compatibili
 - Complete tactical and strategic evaluation
 - 8-second deep analysis capability
 
-#### 8. **Move Generation Complexity**
+### 8. Move Generation Complexity
 
 **Legal Move Validation**: Multi-stage move legality verification
 - **Basic Rule Compliance**: Fundamental Shogi movement rules
@@ -130,27 +130,26 @@ Mike adheres to Universal Shogi Interface standards for professional compatibili
 - **Drop Validation**: Comprehensive drop legality checking
 - **Repetition Detection**: Draw by repetition recognition
 
-#### 9. **Memory Management & Optimization**
+### 9. Memory Management & Optimization
 
 **Efficient Board Representation**: Optimized data structures for rapid position manipulation
 **Move History Tracking**: Complete game record with undo capability
 **Hash Table Optimization**: Dynamic memory allocation based on available resources
 **Garbage Collection**: Intelligent memory cleanup during long games
 
-#### 10. **Error Handling & Robustness**
+### 10. Error Handling & Robustness
 
 **Input Validation**: Comprehensive move and position validation
 **State Recovery**: Automatic error recovery with position restoration
 **Timeout Management**: Graceful handling of time pressure situations
 **Resource Monitoring**: System resource usage optimization
 
-### Performance Characteristics
+### Mike Performance Characteristics
 
 - **Nodes Per Second**: 50,000+ positions evaluated per second
 - **Memory Efficiency**: Optimized for systems with 512MB+ RAM
 - **Scalability**: Linear performance scaling with available CPU cores
 - **Reliability**: 99.9%+ uptime in tournament conditions
-
 
 ## Usage
 
