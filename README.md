@@ -12,7 +12,25 @@ Rudimentary [Shogi Engine](https://en.wikipedia.org/wiki/Computer_shogi) that ad
 
 ## Screenshots
 
-![](./asset/reference/)
+### Difficulty selection
+
+![](./asset/reference/difficulty.png)
+
+### User move
+
+![](./asset/reference/user.png)
+
+### Shogi AI move
+
+![](./asset/reference/ai.png)
+
+### User move suggestion 
+
+![](./asset/reference/suggestion.png)
+
+### User position analysis
+
+![](./asset/reference/analysis.png)
 
 ## Logic
 
