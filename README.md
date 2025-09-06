@@ -4,13 +4,30 @@
 
 ## Rationale
 
+...
+
 ## Stack
+
+* *Frontend*:
+* *Backend*:
+* *Cache*: 
 
 ## Screenshots
 
+...
+
 ## Usage
 
+...
+
+```console
+```
+
 ## Architecture
+
+```mermaid
+
+```
 
 ## Reference
 
